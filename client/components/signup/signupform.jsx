@@ -22,12 +22,23 @@ Signupform = React.createClass({
         var last_name = ReactDOM.findDOMNode(this.refs.last_name).value.trim();
         var email = ReactDOM.findDOMNode(this.refs.email).value.trim();
         var password = ReactDOM.findDOMNode(this.refs.password).value.trim();
-        var user = {email: email, password: password, profile: {fullname:(first_name + last_name).toLowerCase(),firstname: first_name, lastname: last_name,avatar:'http://placehold.it/150x150',friends:[]}};
+        var user = {
+            email: email,
+            password: password,
+            profile: {
+                fullname: (first_name + last_name).toLowerCase(),
+                firstname: first_name,
+                lastname: last_name,
+                avatar: 'http://placehold.it/150x150',
+                friends: []
+            }
+        };
         Accounts.createUser(user, function (e) {
-            FlowRouter.go('/dashboard');
 
             if (e) {
                 that.displayError(e.reason);
+            } else {
+                FlowRouter.go('/dashboard');
             }
         })
 

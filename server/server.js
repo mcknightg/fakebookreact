@@ -56,7 +56,7 @@ Meteor.startup(function () {
             }
             var data = file._id;
 
-            Meteor.users.update(Meteor.userId(), {$set: {'profile.avatar': data}});
+            Meteor.users.update(this.userId, {$set: {'profile.avatar': data}});
         },
         'sendMessage':function(person,subject,message){
             var to = Meteor.users.findOne({_id: person});
@@ -101,7 +101,7 @@ Meteor.startup(function () {
         },
         'likePost': function (userid, postid) {
             console.log(userid, postid);
-            Posts.update(postid, {$addToSet: {likes: userid}});
+            Posts.update(postid, {$addToSet: {likes: this.userId}});
         }
 
     })
